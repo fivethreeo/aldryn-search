@@ -3,7 +3,7 @@ import warnings
 from django.utils.translation import override
 
 from haystack import indexes
-
+from celery_haystack.indexes import CelerySearchIndex
 from .conf import settings
 from .helpers import get_request
 from .utils import clean_join, _get_language_from_alias_func
@@ -12,7 +12,7 @@ from .utils import clean_join, _get_language_from_alias_func
 language_from_alias = _get_language_from_alias_func()
 
 
-class AbstractIndex(indexes.SearchIndex):
+class AbstractIndex(CelerySearchIndex):
     text = indexes.CharField(document=True, use_template=False)
 
     def _get_backend(self, using):
