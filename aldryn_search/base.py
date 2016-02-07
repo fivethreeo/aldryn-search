@@ -12,7 +12,7 @@ from .utils import clean_join, _get_language_from_alias_func
 language_from_alias = _get_language_from_alias_func()
 
 
-class AbstractIndex(CelerySearchIndex):
+class AbstractIndex(CelerySearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=False)
 
     def _get_backend(self, using):
